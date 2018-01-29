@@ -1,0 +1,37 @@
+// JBoss, Home of Professional Open Source
+// Copyright 2016, Red Hat, Inc. and/or its affiliates, and individual
+// contributors by the @authors tag. See the copyright.txt in the
+// distribution for a full listing of individual contributors.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// http://www.apache.org/licenses/LICENSE-2.0
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+### Deploy a frontend Service
+Duration 3:00
+
+Each Pod has a unique IP address - but the address is ephemeral.  The Pod IP addresses are not stable and it can change when Pods start and/or restart. A service provides a single access point to a set of pods matching some constraints. A Service IP address is stable.
+
+Create the frontend service:
+
+[source, bash, subs="normal,attributes"]
+----
+$ *kubectl create -f frontend-service.yaml*
+service "frontend-ui" created
+----
+
+And check it:
+
+[source, bash, subs="normal,attributes"]
+----
+$ *kubectl get services*
+NAME          CLUSTER-IP      EXTERNAL-IP                   PORT(S)        AGE
+frontend-ui   172.30.40.241   172.29.133.81,172.29.133.81   80:32476/TCP   7s
+----
+

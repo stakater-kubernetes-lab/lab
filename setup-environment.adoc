@@ -1,0 +1,92 @@
+// JBoss, Home of Professional Open Source
+// Copyright 2016, Red Hat, Inc. and/or its affiliates, and individual
+// contributors by the @authors tag. See the copyright.txt in the
+// distribution for a full listing of individual contributors.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// http://www.apache.org/licenses/LICENSE-2.0
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+## Setup environment
+Duration: 15:00
+
+This section describes what, how, and where to install the software needed for this lab. This lab is designed for a BYOL (Bring Your Own Laptop) style hands-on-lab.
+
+### Hardware
+
+- Operating System: Windows 7 (SP1), Mac OS X (10.8 or later), Fedora (21 or later)
+- Memory: At least 4 GB+, preferred 8 GB
+
+### Software
+
+#### Development tools
+
+Make sure to have the following tools/packages installed:
+
+- GIT
+- Maven
+
+#### CDK
+
+link:http://developers.redhat.com/products/cdk/overview/[Red Hat Container Development Kit] is a pre-built container development environment based on RHEL - Red Hat Enterprise Linux to help you get started developing container-based applications quickly. 
+
+Developers can get the Red Hat Container Development Kit via no-cost Red Hat Enterprise Linux® Developer Suite subscription for development purposes by link:https://developers.redhat.com/products/cdk/download/[registering and downloading] through link:developers.redhat.com/[developers.redhat.com]. 
+
+IMPORTANT: Make sure to take notes of your username(email) and password. It will be used as the free subscription for RHEL.
+
+Setup CDK:
+
+- Download CDK/minishift
+- Rename it to `minishift`
+- Configure the PATH
+- Configure CDK
+- Start the environment with *minishift start*
+
+[source,bash,subs="normal,attributes"]
+----
+# From the Downloads folder (or any other folder)
+$ sudo mv cdk-3.* /usr/local/bin/minishift
+$ sudo chmod +x /usr/local/bin/minishift
+
+# Setup CDK
+$ minishift setup-cdk
+
+# Configure minishift credentials
+$ export MINISHIFT_USERNAME=<Red_Hat_username>
+$ export MINISHIFT_PASSWORD=<Red_Hat_password>
+
+# Start CDK/minishift
+$ minishift start
+----
+
+#### kubectl
+
+To install kubectl binary, follow the link:https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-binary-via-curl[Install kubectl binary via curl] tutorial
+
+TIP: macOS users can install `kubectl` through homebrew using the following command `brew install kubectl`
+
+### Login in the cluster
+
+This lab uses link:https://www.openshift.org/[OpenShift], which is an Enterprise distribution of Kubernetes. Because of some Enterprise features like security, it's needed to authenticate against this cluster.
+
+To authenticate in the cluster, you need to access to the `oc` binary. You can add the oc binary to you path by running the following command:
+
+[source,bash,subs="normal,attributes"]
+----
+# Add oc binary to the PATH
+$ eval $(minishift oc-env)
+
+# Login in the cluster
+$ oc login OPENSHIFT_IP:8443
+
+# Example:
+$ oc login $(minishift ip):8443
+----
+
+TIP: If you are using minishift, use the credentials *developer/developer* - If you are running using another environment, make sure to use the provided credentials.
